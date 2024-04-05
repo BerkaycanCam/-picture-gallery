@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "MobilGaleri",
+    "slug": "MobilGaleri",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "MobilGaleri"
+}
