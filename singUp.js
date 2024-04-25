@@ -10,6 +10,7 @@ const LoginScreen = ({navigation}) => {
     navigation.navigate('SignUp');
   };
 
+
   return (
     <ImageBackground
      source={require('./images/arkaplanSingup.jpg')}

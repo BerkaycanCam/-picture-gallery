@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import LoginScreen from './login';
 import SignUpScreen from './singUp';
+import HomeScreen from './HomeScreen'; // Yeni eklediğimiz HomeScreen bileşeni
 
 const Stack = createStackNavigator();
 
@@ -19,6 +20,11 @@ function App() {
           name="SignUp"
           component={SignUpScreen}
           options={{ title: 'Kayıt Ol' }}
+        />
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen} // 
+          options={{ title: 'Benim Galerim' }} // İsteğe bağlı, başlık ayarları
         />
       </Stack.Navigator>
     </NavigationContainer>

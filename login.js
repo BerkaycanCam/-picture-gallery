@@ -3,6 +3,7 @@ import { View, TextInput, TouchableOpacity, Text, StyleSheet, ImageBackground } 
 
 const LoginScreen = ({ navigation }) => {
   const handleLogin = () => {
+    navigation.navigate('Home'); // 'Home' ekranına yönlendirme
     // Giriş işlemleri burada gerçekleştirilebilir
   };
 
@@ -22,8 +23,8 @@ const LoginScreen = ({ navigation }) => {
           <Text style={styles.buttonText}>Giriş Yap</Text>
         </TouchableOpacity>
         <View style={{ marginVertical: 5 }} />
-        <TouchableOpacity onPress={handleSignUp}>
-          <Text style={styles.signUpText}>Kayıt Ol</Text>
+        <TouchableOpacity onPress={handleSignUp} >
+          <Text style={styles.signUpText} >Kayıt Ol</Text>
         </TouchableOpacity>
       </View>
     </ImageBackground>
@@ -50,6 +51,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     paddingHorizontal: 10,
     color: 'white',
+    borderRadius:5,
   },
   button: {
     backgroundColor: 'blue',
@@ -62,9 +64,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   signUpText: {
+    fontSize:15,
     color: 'white',
     textDecorationLine: 'underline',
   },
+
 });
 
 export default LoginScreen;
