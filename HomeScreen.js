@@ -1,40 +1,33 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  FlatList,
-  Image,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity } from "react-native";
 
-const HomeScreen = () => {
-  // Resim verilerini tutacak state
-  const [images, setImages] = useState([
-    { id: 1, source: require("./images/Berkaycan.jpg") },
-
-    // Diğer resimleri buraya ekleyin...
-  ]);
-  const [FavoriImages, setFavori] = useState([
-    { id: 2, source: require("./images/guts.jpg") },
-  ]);
-
-  const [Ekle, setEkle] = useState([
-    { id: 3, source: require("./images/Ekleme.jpg") },
-  ]);
-  // Resme tıklandığında yapılacak işlem
-  const handleImagePress = (id) => {
-    // İlgili resmin büyütülmüş versiyonunu göstermek için istediğiniz navigasyon veya başka bir işlemi burada yapabilirsiniz.
-    console.log("Tıklanan resmin IDsi:", id);
-    // buraya tıklandığında galerideki bütün fotoğrafları görüntüleyen kod bloğu gelecek.
+const Galerim = ({ navigation }) => {
+  const handleGalerim = () => {
+    navigation.navigate('MainGaleri'); // Galerim ekranına geçiş yap
   };
 
-  // Her bir resmin render edilmesi için kullanılan özel işlev
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Galerim</Text>
+      <TouchableOpacity onPress={handleGalerim} style={styles.imageContainer}>
+        <Image source={require("./images/Berkaycan.jpg")} style={styles.image} />
+      </TouchableOpacity>
+    </View>
+  );
+};
+
+const HomeScreen = ({ navigation }) => {
+  const [images, setImages] = useState([
+    { id: 1, source: require("./images/Berkaycan.jpg") },
+    // Diğer resimleri buraya ekleyin...
+  ]);
+
+  const handleImagePress = () => {
+    navigation.navigate('MainGaleri'); // Galerim ekranına geçiş yap
+  };
+
   const renderImageItem = ({ item }) => (
-    <TouchableOpacity
-      onPress={() => handleImagePress(item.id)}
-      style={styles.imageContainer}
-    >
+    <TouchableOpacity onPress={handleImagePress} style={styles.imageContainer}>
       <Image source={item.source} style={styles.image} />
     </TouchableOpacity>
   );
@@ -42,39 +35,17 @@ const HomeScreen = () => {
   return (
     <View style={styles.body}>
       <View style={styles.container}>
-      <Text style ={[styles.title,{width:500},{height:50}]}>Koleksiyonum</Text>
+        <Text style={[styles.title, { width: 500 }, { height: 50 }]}>Koleksiyonum</Text>
         <View style={styles.Galeri}>
           <Text style={styles.title}>Galerim</Text>
           <FlatList
             data={images}
-            renderItem={renderImageItem} // renderItem prop'unu tekrar etkinleştirin
+            renderItem={renderImageItem}
             keyExtractor={(item) => item.id.toString()}
             numColumns={2}
             contentContainerStyle={styles.imageList}
           />
         </View>
-        <View style={styles.Favori}>
-          <Text style={styles.title}>Favoriler</Text>
-          <FlatList
-            data={FavoriImages}
-            renderItem={renderImageItem} // renderItem prop'unu tekrar etkinleştirin
-            keyExtractor={(item) => item.id.toString()}
-            numColumns={2}
-            contentContainerStyle={styles.imageList}
-          />
-        </View>
-        <View style={styles.Ekleme}>
-          <Text style={styles.title}>Kategori Ekle</Text>
-          <FlatList
-            data={Ekle}
-            renderItem={renderImageItem} // renderItem prop'unu tekrar etkinleştirin
-            keyExtractor={(item) => item.id.toString()}
-            numColumns={2}
-            contentContainerStyle={styles.imageList}
-          />
-        </View>
-        
-        
       </View>
     </View>
   );
@@ -82,9 +53,7 @@ const HomeScreen = () => {
 
 const styles = StyleSheet.create({
   body: {
-    flex:1,
-    
-
+    flex: 1,
   },
   container: {
     borderRadius: 5,
@@ -95,11 +64,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
     maxHeight: 600,
     maxWidth: 390,
-    flexDirection: 'row', // Dikey düzen
-    flexWrap: 'wrap', // Taşmaları yönetmek için
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     marginLeft: 5,
     marginRight: 5,
-    
   },
   title: {
     fontSize: 24,
@@ -124,16 +92,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   Galeri: {
-    marginLeft:10,
-  },
-  Favori:{
-    marginLeft:50,
-
-  },
-  Ekleme:{
-    marginTop:20,
-    marginLeft:10,
-
+    marginLeft: 10,
   },
 });
 
