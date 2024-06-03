@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity } from "react-native";
+import { launchImageLibrary } from 'react-native-image-picker';
 
 const Galerim = ({ navigation }) => {
   const handleGalerim = () => {
@@ -16,18 +17,49 @@ const Galerim = ({ navigation }) => {
   );
 };
 
+const Favorilerim = ({ navigation }) => {
+  const handleFavorilerim = () => {
+    navigation.navigate('MainFavori'); // Favorilerim ekranına geçiş yap
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Favorilerim</Text>
+      <TouchableOpacity onPress={handleFavorilerim} style={styles.imageContainer}>
+        <Image source={require("./images/guts.jpg")} style={styles.image} />
+      </TouchableOpacity>
+    </View>
+  );
+};
+
 const HomeScreen = ({ navigation }) => {
   const [images, setImages] = useState([
     { id: 1, source: require("./images/Berkaycan.jpg") },
-    // Diğer resimleri buraya ekleyin...
+    { id: 2, source: require("./images/guts.jpg") }
   ]);
 
-  const handleImagePress = () => {
-    navigation.navigate('MainGaleri'); // Galerim ekranına geçiş yap
+  const handleImagePress = (id) => {
+    if (id === 1) {
+      navigation.navigate('MainGaleri'); // Galerim ekranına geçiş yap
+    } else if (id === 2) {
+      navigation.navigate('favorite'); // Favorilerim ekranına geçiş yap
+    }
+  };
+
+  const handleAddImage = () => {
+    launchImageLibrary({ mediaType: 'photo' }, (response) => {
+      if (response.assets && response.assets.length > 0) {
+        const newImage = {
+          id: images.length + 1,
+          source: { uri: response.assets[0].uri }
+        };
+        setImages([...images, newImage]);
+      }
+    });
   };
 
   const renderImageItem = ({ item }) => (
-    <TouchableOpacity onPress={handleImagePress} style={styles.imageContainer}>
+    <TouchableOpacity onPress={() => handleImagePress(item.id)} style={styles.imageContainer}>
       <Image source={item.source} style={styles.image} />
     </TouchableOpacity>
   );
@@ -46,6 +78,9 @@ const HomeScreen = ({ navigation }) => {
             contentContainerStyle={styles.imageList}
           />
         </View>
+        <TouchableOpacity style={styles.button} onPress={handleAddImage}>
+          <Text style={styles.buttonText}>Resim Ekle</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -54,20 +89,15 @@ const HomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   body: {
     flex: 1,
+    backgroundColor: '#fff',
   },
   container: {
-    borderRadius: 5,
-    borderWidth: 4,
+    borderRadius: 10,
+    borderWidth: 5,
     borderColor: 'lightseagreen',
-    backgroundColor: 'white',
+    backgroundColor: 'rgb(230, 220, 226)',
     paddingVertical: 5,
-    paddingHorizontal: 5,
-    maxHeight: 600,
-    maxWidth: 390,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    marginLeft: 5,
-    marginRight: 5,
+    margin: 5,
   },
   title: {
     fontSize: 24,
@@ -76,14 +106,13 @@ const styles = StyleSheet.create({
   },
   imageList: {
     justifyContent: 'center',
-    marginTop: 5,
-    maxWidth: 120,
   },
   imageContainer: {
     borderColor: 'black',
-    borderWidth: 5,
-    width: '100%',
-    height: 200,
+    borderWidth: 3,
+    width: '48%',
+    aspectRatio: 1,
+    margin: '1%',
     borderRadius: 10,
   },
   image: {
@@ -93,6 +122,19 @@ const styles = StyleSheet.create({
   },
   Galeri: {
     marginLeft: 10,
+    display: 'flex',
+  },
+  button: {
+    backgroundColor: 'lightseagreen',
+    padding: 10,
+    margin: 20,
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+  buttonText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#fff',
   },
 });
 

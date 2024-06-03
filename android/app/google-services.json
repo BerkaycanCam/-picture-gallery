@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1080432497570",
+    "project_id": "demoapp-ba038",
+    "storage_bucket": "demoapp-ba038.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1080432497570:android:defd691df60aeb862298fb",
+        "android_client_info": {
+          "package_name": "com.MyMonileApp.myapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkfgvoM6m9Cgb2msA2e-WJdL4V0bhbVDE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     height: 40,
     width: '70%',
     borderColor: 'white',
-    borderWidth: 1,
+    borderWidth: 2,
     marginBottom: 10,
     paddingHorizontal: 10,
     color: 'white',
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   signUpText: {
-    fontSize:15,
+    fontSize:17,
     color: 'white',
     textDecorationLine: 'underline',
   },

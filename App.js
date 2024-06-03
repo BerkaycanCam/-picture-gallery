@@ -5,6 +5,7 @@ import LoginScreen from "./login";
 import SignUpScreen from "./singUp";
 import HomeScreen from "./HomeScreen"; // Yeni eklediğimiz HomeScreen bileşeni
 import MainGaleri from "./MainGaleri";
+import Favoriler from './favorite';
 
 
 const Stack = createStackNavigator();
@@ -32,6 +33,11 @@ function App() {
           name="MainGaleri"
           component={MainGaleri}
           options={{ title: "Galerim" }}
+        />
+                <Stack.Screen
+          name="favorite"
+          component={Favoriler}
+          options={{ title: "Favoriler" }}
         />
       </Stack.Navigator>
     </NavigationContainer>
